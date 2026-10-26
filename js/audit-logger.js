@@ -2,7 +2,7 @@
  * MUSO File Transfer - Industrial Security Audit Logger
  * Maintains immutable in-memory & localStorage compliance trails
  * Supports NIST SP 800-53, FIPS 140-3, and GDPR compliance telemetry
- * Authors: Srivatsa Soham, Reniman Muzeem, Polina Hswitha, Shaik Saleena
+ * Authors: Srivatsa Soham, Reniman Muzeem, Polina Haswitha, Shaik Saleena
  */
 
 class MusoAuditLogger {
@@ -30,7 +30,7 @@ class MusoAuditLogger {
         action: 'Cryptographic Subsystem Boot',
         algorithm: 'WebCrypto / Hardware-Accelerated',
         status: 'SUCCESS',
-        details: 'MUSO zero-knowledge engine initialized. Authors: Srivatsa Soham, Reniman Muzeem, Polina Hswitha, Shaik Saleena',
+        details: 'MUSO zero-knowledge engine initialized. Authors: Srivatsa Soham, Reniman Muzeem, Polina Haswitha, Shaik Saleena',
         integrityHash: 'f4b1c8a0d9e273bc1140ae679df012ac441982bdeea'
       }
     ];

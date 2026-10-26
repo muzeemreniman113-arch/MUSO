@@ -2,7 +2,7 @@
  * MUSO File Transfer - Cryptographic Engine
  * Industrial-grade client-side zero-knowledge encryption module
  * Standards: NIST SP 800-38D (AES-GCM), FIPS 140-3, RFC 8018 (PBKDF2)
- * Authors: Srivatsa Soham, Reniman Muzeem, Polina Hswitha, Shaik Saleena
+ * Authors: Srivatsa Soham, Reniman Muzeem, Polina Haswitha, Shaik Saleena
  */
 
 class MusoCryptoEngine {

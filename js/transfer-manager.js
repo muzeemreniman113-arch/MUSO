@@ -2,7 +2,7 @@
  * MUSO File Transfer - Transfer Manager & P2P Tunnel Dispatcher
  * Handles zero-knowledge link generation, BroadcastChannel inter-tab relay,
  * expiration counters, and tamper verification.
- * Authors: Srivatsa Soham, Reniman Muzeem, Polina Hswitha, Shaik Saleena
+ * Authors: Srivatsa Soham, Reniman Muzeem, Polina Haswitha, Shaik Saleena
  */
 
 class MusoTransferManager {
