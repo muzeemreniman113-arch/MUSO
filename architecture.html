@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUSO File Transfer - System Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-ivory: #FAF8F2;
+      --card-white: #FFFFFF;
+      --border-sand: #E2DBD0;
+      --olive-primary: #3F5122;
+      --olive-dark: #2F3D18;
+      --olive-light: #EEF4E4;
+      --olive-border: #CBD9B5;
+      --caramel-primary: #C47C35;
+      --caramel-dark: #A86523;
+      --caramel-light: #FBF4E8;
+      --caramel-border: #E8CCA8;
+      --text-main: #23251E;
+      --text-muted: #5E6254;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-ivory);
+      color: var(--text-main);
+      line-height: 1.35;
+      padding: 16px;
+      font-size: 12.5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Print Page Container - Strictly 1 Page A4 */
+    .sheet {
+      width: 100%;
+      max-width: 900px;
+      background: var(--card-white);
+      border: 1px solid var(--border-sand);
+      border-radius: 12px;
+      padding: 24px 28px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Top Controls bar (Screen Only) */
+    .controls-bar {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+      font-family: var(--font-sans);
+    }
+
+    .btn-olive {
+      background: var(--olive-primary);
+      color: #FFF;
+    }
+    .btn-olive:hover {
+      background: var(--olive-dark);
+    }
+
+    .btn-outline {
+      background: #FFF;
+      color: var(--text-main);
+      border-color: var(--border-sand);
+    }
+    .btn-outline:hover {
+      background: var(--bg-ivory);
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--olive-primary);
+      padding-bottom: 10px;
+    }
+
+    .brand-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--olive-primary);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--caramel-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .meta-credits {
+      text-align: right;
+      font-size: 10.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .meta-credits strong {
+      color: var(--text-main);
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--olive-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-sand);
+    }
+
+    /* SVG Diagram Container */
+    .diagram-container {
+      background: var(--bg-ivory);
+      border: 1px solid var(--border-sand);
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .diagram-svg {
+      width: 100%;
+      height: auto;
+      max-height: 310px;
+    }
+
+    /* Layer Architecture Table */
+    .layer-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      border: 1px solid var(--border-sand);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .layer-table th {
+      background: var(--olive-light);
+      color: var(--olive-primary);
+      text-align: left;
+      padding: 6px 10px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--olive-border);
+      width: 24%;
+    }
+
+    .layer-table td {
+      padding: 5.5px 10px;
+      border-bottom: 1px solid var(--border-sand);
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .layer-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .layer-name {
+      font-weight: 700;
+      color: var(--olive-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-layer {
+      font-size: 9px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: var(--caramel-light);
+      color: var(--caramel-dark);
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    /* Security Note Box */
+    .security-note-box {
+      background: #FFFBF2;
+      border: 1px solid var(--caramel-border);
+      border-left: 4px solid var(--caramel-primary);
+      border-radius: 6px;
+      padding: 8px 12px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .security-note-icon {
+      color: var(--caramel-primary);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .security-note-content {
+      font-size: 10.5px;
+      line-height: 1.4;
+      color: var(--text-main);
+    }
+
+    .security-note-content strong {
+      color: var(--caramel-dark);
+    }
+
+    /* Footer */
+    .sheet-footer {
+      border-top: 1px solid var(--border-sand);
+      padding-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9.5px;
+      color: var(--text-muted);
+    }
+
+    /* Print Styles: Strictly Single Page A4 */
+    @media print {
+      body {
+        padding: 0;
+        background: #FFF;
+      }
+      .controls-bar {
+        display: none !important;
+      }
+      .sheet {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+        width: 100%;
+        gap: 10px;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 10mm 12mm;
+      }
+      .diagram-container {
+        border-color: #DDD;
+      }
+      .diagram-svg {
+        max-height: 290px;
+      }
+      .layer-table td {
+        padding: 4.5px 8px;
+        font-size: 10px;
+      }
+      .security-note-box {
+        padding: 6px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Controls Bar (Hidden during printing) -->
+  <div class="controls-bar">
+    <a href="index.html" class="btn btn-outline">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back to MUSO Application
+    </a>
+
+    <div style="display: flex; gap: 8px;">
+      <button class="btn btn-olive" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        Print / Save 1-Page PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- The Single Page A4 Sheet -->
+  <div class="sheet">
+
+    <!-- Header Section -->
+    <header class="header">
+      <div>
+        <div class="brand-title">MUSO File Transfer &bull; System Architecture</div>
+        <div class="brand-subtitle">Secure File Transfer using Client-Side Encryption &bull; NIST SP 800-38D Spec</div>
+      </div>
+      <div class="meta-credits">
+        <div><strong>Project Engineers &amp; Authors:</strong></div>
+        <div>Srivatsa Soham &bull; Reniman Muzeem</div>
+        <div>Polina Haswitha &bull; Shaik Saleena</div>
+      </div>
+    </header>
+
+    <!-- Part 1: Visual System Architecture Flow Diagram -->
+    <section>
+      <div class="section-title">
+        <span>System Architecture Flow Diagram</span>
+      </div>
+
+      <div class="diagram-container">
+        <!-- High-Precision Responsive Vector Architecture Diagram -->
+        <svg class="diagram-svg" viewBox="0 0 840 280" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-olive" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 8 5 L 0 9 z" fill="#3F5122"/>
+            </marker>
+            <marker id="arr-caramel" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 8 5 L 0 9 z" fill="#C47C35"/>
+            </marker>
+            <linearGradient id="grad-olive" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#3F5122"/>
+              <stop offset="100%" stop-color="#2F3D18"/>
+            </linearGradient>
+            <linearGradient id="grad-caramel" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#DE9249"/>
+              <stop offset="100%" stop-color="#C47C35"/>
+            </linearGradient>
+            <linearGradient id="grad-container" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#EEF4E4"/>
+              <stop offset="100%" stop-color="#FBF4E8"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Zone 1: SENDER CLIENT (Client-Side Encryption) -->
+          <rect x="10" y="10" width="370" height="260" rx="8" fill="#FAFDF6" stroke="#CBD9B5" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="25" y="28" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#3F5122" letter-spacing="0.5">SENDER DOMAIN (CLIENT-SIDE ZERO KNOWLEDGE)</text>
+
+          <!-- Step 1: Select File -->
+          <rect x="25" y="45" width="95" height="42" rx="6" fill="#FFFFFF" stroke="#3F5122" stroke-width="1.5"/>
+          <text x="72" y="63" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#23251E" text-anchor="middle">Select File</text>
+          <text x="72" y="77" font-family="JetBrains Mono, monospace" font-size="8" fill="#5E6254" text-anchor="middle">Raw Data Stream</text>
+
+          <!-- Arrow 1 -> 2 -->
+          <line x1="120" y1="66" x2="148" y2="66" stroke="#3F5122" stroke-width="1.5" marker-end="url(#arr-olive)"/>
+
+          <!-- Step 2: Calculate SHA-256 -->
+          <rect x="150" y="45" width="105" height="42" rx="6" fill="#EEF4E4" stroke="#3F5122" stroke-width="1.5"/>
+          <text x="202" y="62" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#3F5122" text-anchor="middle">Calculate SHA-256</text>
+          <text x="202" y="76" font-family="JetBrains Mono, monospace" font-size="8" fill="#23251E" text-anchor="middle">Pre-Hash Digest</text>
+
+          <!-- Step 3: Enter / Generate Secret (Bottom Left) -->
+          <rect x="25" y="125" width="115" height="42" rx="6" fill="#FBF4E8" stroke="#C47C35" stroke-width="1.5"/>
+          <text x="82" y="142" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#C47C35" text-anchor="middle">Secret Passphrase</text>
+          <text x="82" y="156" font-family="JetBrains Mono, monospace" font-size="8" fill="#5E6254" text-anchor="middle">PBKDF2 Key Derivation</text>
+
+          <!-- Arrow 3 -> 4 -->
+          <line x1="140" y1="146" x2="158" y2="146" stroke="#C47C35" stroke-width="1.5" marker-end="url(#arr-caramel)"/>
+
+          <!-- Step 4: AES-256-GCM Encryption (Center Sender) -->
+          <rect x="160" y="120" width="130" height="52" rx="6" fill="url(#grad-olive)" stroke="#2F3D18" stroke-width="1.5"/>
+          <text x="225" y="141" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">AES-256-GCM</text>
+          <text x="225" y="157" font-family="JetBrains Mono, monospace" font-size="8" fill="#EEF4E4" text-anchor="middle">128-bit Auth Tag + IV</text>
+
+          <!-- Pre-Hash feed into Packaging -->
+          <path d="M 255 66 L 310 66 L 310 120" fill="none" stroke="#3F5122" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-olive)"/>
+          <text x="290" y="94" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#5E6254">Pre-Hash</text>
+
+          <!-- Arrow 4 -> 5 -->
+          <line x1="290" y1="146" x2="308" y2="146" stroke="#3F5122" stroke-width="1.5" marker-end="url(#arr-olive)"/>
+
+          <!-- Step 5: Package as .MUSO -->
+          <rect x="310" y="120" width="60" height="95" rx="6" fill="url(#grad-container)" stroke="#C47C35" stroke-width="1.5"/>
+          <text x="340" y="146" font-family="Inter, sans-serif" font-size="9" font-weight="800" fill="#3F5122" text-anchor="middle">PACKAGE</text>
+          <text x="340" y="160" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700" fill="#C47C35" text-anchor="middle">.MUSO</text>
+          <text x="340" y="174" font-family="Inter, sans-serif" font-size="7.5" fill="#5E6254" text-anchor="middle">Container</text>
+          <text x="340" y="196" font-family="JetBrains Mono, monospace" font-size="7" fill="#5E6254" text-anchor="middle">IV/Salt/Tag</text>
+
+          <!-- Step 6: Share / Transfer Container (Mid Bridge) -->
+          <path d="M 370 167 L 458 167" fill="none" stroke="#C47C35" stroke-width="2" marker-end="url(#arr-caramel)"/>
+          <rect x="388" y="152" width="55" height="26" rx="4" fill="#FFFFFF" stroke="#C47C35" stroke-width="1"/>
+          <text x="415" y="164" font-family="Inter, sans-serif" font-size="7.5" font-weight="700" fill="#C47C35" text-anchor="middle">TRANSFER</text>
+          <text x="415" y="173" font-family="JetBrains Mono, monospace" font-size="6.5" fill="#5E6254" text-anchor="middle">P2P/Link/QR</text>
+
+          <!-- Zone 2: RECEIVER DOMAIN (Decryption & Integrity Verification) -->
+          <rect x="460" y="10" width="370" height="260" rx="8" fill="#FDFBF7" stroke="#E8CCA8" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="475" y="28" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#C47C35" letter-spacing="0.5">RECEIVER DOMAIN (INTEGRITY &amp; AUTHENTICATION)</text>
+
+          <!-- Step 7: Load Container -->
+          <rect x="475" y="125" width="75" height="42" rx="6" fill="#EEF4E4" stroke="#3F5122" stroke-width="1.5"/>
+          <text x="512" y="142" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#3F5122" text-anchor="middle">Load Container</text>
+          <text x="512" y="156" font-family="JetBrains Mono, monospace" font-size="8" fill="#5E6254" text-anchor="middle">Parse .MUSO</text>
+
+          <!-- Arrow 7 -> 8 -->
+          <line x1="550" y1="146" x2="568" y2="146" stroke="#3F5122" stroke-width="1.5" marker-end="url(#arr-olive)"/>
+
+          <!-- Step 8: Decrypt & Authenticate -->
+          <rect x="570" y="120" width="125" height="52" rx="6" fill="url(#grad-olive)" stroke="#2F3D18" stroke-width="1.5"/>
+          <text x="632" y="141" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">Decrypt &amp; Authenticate</text>
+          <text x="632" y="157" font-family="JetBrains Mono, monospace" font-size="8" fill="#EEF4E4" text-anchor="middle">AES-GCM Tag Verify</text>
+
+          <!-- Secret Key feed to Decrypt -->
+          <rect x="580" y="45" width="105" height="34" rx="4" fill="#FBF4E8" stroke="#C47C35" stroke-width="1"/>
+          <text x="632" y="60" font-family="Inter, sans-serif" font-size="8.5" font-weight="700" fill="#C47C35" text-anchor="middle">Shared Passphrase</text>
+          <text x="632" y="72" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#5E6254" text-anchor="middle">Key Matching</text>
+          <line x1="632" y1="79" x2="632" y2="118" stroke="#C47C35" stroke-width="1.5" marker-end="url(#arr-caramel)"/>
+
+          <!-- Arrow 8 -> 9 -->
+          <line x1="695" y1="146" x2="713" y2="146" stroke="#3F5122" stroke-width="1.5" marker-end="url(#arr-olive)"/>
+
+          <!-- Step 9: Calculate SHA-256 (Decrypted) -->
+          <rect x="715" y="125" width="105" height="42" rx="6" fill="#EEF4E4" stroke="#3F5122" stroke-width="1.5"/>
+          <text x="767" y="142" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#3F5122" text-anchor="middle">Calculate SHA-256</text>
+          <text x="767" y="156" font-family="JetBrains Mono, monospace" font-size="8" fill="#23251E" text-anchor="middle">Post-Hash Digest</text>
+
+          <!-- Step 10: Compare Hashes (Downwards) -->
+          <path d="M 767 167 L 767 205" fill="none" stroke="#3F5122" stroke-width="1.5" marker-end="url(#arr-olive)"/>
+          <rect x="685" y="205" width="135" height="42" rx="6" fill="#FFFFFF" stroke="#3F5122" stroke-width="1.5"/>
+          <text x="752" y="222" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="middle">&#10003; Compare Hashes</text>
+          <text x="752" y="236" font-family="JetBrains Mono, monospace" font-size="7.5" fill="#5E6254" text-anchor="middle">Pre-Hash == Post-Hash</text>
+
+          <!-- Step 11: Save / Preview Recovered File -->
+          <path d="M 685 226 L 638 226" fill="none" stroke="#3F5122" stroke-width="1.5" marker-end="url(#arr-olive)"/>
+          <rect x="495" y="205" width="140" height="42" rx="6" fill="url(#grad-caramel)" stroke="#A86523" stroke-width="1.5"/>
+          <text x="565" y="222" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">Save / Preview File</text>
+          <text x="565" y="236" font-family="Inter, sans-serif" font-size="7.5" fill="#FFF" text-anchor="middle">Tamper-Free Recovery</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Part 2: System Architecture Layer Stack (Matching Specification) -->
+    <section>
+      <div class="section-title">
+        <span>System Architecture Layer Stack</span>
+      </div>
+
+      <table class="layer-table">
+        <tbody>
+          <tr>
+            <th>
+              <div class="layer-name">
+                <span>Container Layer</span>
+                <span class="badge-layer">.MUSO</span>
+              </div>
+            </th>
+            <td>
+              Packages ciphertext payload, 12-byte IV (nonce), PBKDF2 salt, file metadata (filename, byte size, MIME type), and expiration control fields for structured serialization and later loading.
+            </td>
+          </tr>
+
+          <tr>
+            <th>
+              <div class="layer-name">
+                <span>Integrity Layer</span>
+                <span class="badge-layer">SHA-256</span>
+              </div>
+            </th>
+            <td>
+              Calculates SHA-256 hashes pre-encryption and post-decryption; exposes comparison fields to verify recovered data integrity and detect modifications.
+            </td>
+          </tr>
+
+          <tr>
+            <th>
+              <div class="layer-name">
+                <span>Key Utility Layer</span>
+                <span class="badge-layer">AES / RSA</span>
+              </div>
+            </th>
+            <td>
+              Provides symmetric-key generation (AES-256) and RSA key-pair generation (2048/4096-bit) with public/private key export controls in standard PEM formats.
+            </td>
+          </tr>
+
+          <tr>
+            <th>
+              <div class="layer-name">
+                <span>Transfer / Demo Layer</span>
+                <span class="badge-layer">P2P / QR</span>
+              </div>
+            </th>
+            <td>
+              Offers transfer-link and QR controls plus a peer-to-peer demo interface described as using BroadcastChannel and ephemeral ECDH.
+            </td>
+          </tr>
+
+          <tr>
+            <th>
+              <div class="layer-name">
+                <span>Audit / Reporting Layer</span>
+                <span class="badge-layer">JSON / CSV</span>
+              </div>
+            </th>
+            <td>
+              Displays cryptographic event information (timestamps, algorithms, digests, status) and provides JSON/CSV export controls.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Part 3: Official Security Note (From Manuscript) -->
+    <section>
+      <div class="security-note-box">
+        <svg class="security-note-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <div class="security-note-content">
+          <strong>Security note:</strong> AES-GCM provides confidentiality and authentication when used correctly with a unique nonce and a protected key. A SHA-256 hash comparison is useful for detecting differences when the expected hash is trustworthy, but a plain hash by itself is not a digital signature or proof of sender identity.
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="sheet-footer">
+      <div>MUSO File Transfer &bull; Architecture Specification v2026.1 &bull; 1-Page Summary</div>
+      <div>Engineered by Srivatsa Soham, Reniman Muzeem, Polina Haswitha, Shaik Saleena</div>
+    </footer>
+
+  </div>
+
+</body>
+</html>

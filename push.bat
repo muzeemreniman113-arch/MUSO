@@ -23,8 +23,10 @@ if %ERRORLEVEL% NEQ 0 (
 )
 
 echo.
-echo [2/3] Verifying repository status...
+echo [2/3] Staging and committing files...
 cd /d "%~dp0"
+git add .
+git commit -m "Add neat 1-page System Architecture diagram and specification"
 git status --short
 
 echo.

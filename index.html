@@ -44,6 +44,16 @@
           <span>WebCrypto Accelerated</span>
         </div>
 
+        <a href="architecture.html" target="_blank" class="btn btn-sm btn-outline-olive" title="View 1-Page Architecture Specification">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          <span>Architecture (1-Page)</span>
+        </a>
+
         <button class="btn btn-sm btn-outline-caramel" id="btnHeaderDemo">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polygon points="5 3 19 12 5 21 5 3"/>
@@ -112,6 +122,17 @@
           <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
         </svg>
         <span>Project Credits</span>
+      </button>
+
+      <button class="nav-tab-btn" data-tab="architecture">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+          <path d="M10 6.5h4M6.5 10v4M17.5 10v4M10 17.5h4"/>
+        </svg>
+        <span>System Architecture</span>
       </button>
     </div>
   </nav>
@@ -912,6 +933,211 @@
         <div style="font-size: 0.82rem; font-weight: 600; color: var(--caramel-primary);">
           Project Credits: Srivatsa Soham, Reniman Muzeem, Polina Haswitha, Shaik Saleena &bull; MUSO File Transfer &copy; 2026
         </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 7: SYSTEM ARCHITECTURE & 1-PAGE SPECIFICATION
+         ==================================================================== -->
+    <section class="tab-pane" id="tabPane-architecture">
+      <div class="muso-card" style="margin-bottom: 24px;">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+                <path d="M10 6.5h4M6.5 10v4M17.5 10v4M10 17.5h4"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="card-title">MUSO System Architecture &amp; Data Flow</h2>
+              <div class="card-subtitle">Complete 1-Page Industrial Cryptographic Specification &bull; NIST SP 800-38D</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <a href="architecture.html" target="_blank" class="btn btn-sm btn-olive">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              <span>Open 1-Page Printable View</span>
+            </a>
+            <a href="architecture.html" target="_blank" class="btn btn-sm btn-outline-caramel">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 6 2 18 2 18 9"/>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                <rect x="6" y="14" width="12" height="8"/>
+              </svg>
+              <span>Save 1-Page PDF</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Visual Flow Diagram -->
+        <div style="background: var(--bg-subtle); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px;">
+          <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--olive-primary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
+            System Architecture Flow Diagram
+          </h3>
+
+          <div style="background: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 12px; overflow-x: auto;">
+            <svg style="width: 100%; min-width: 760px; height: auto;" viewBox="0 0 840 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr-olive-tab" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 8 5 L 0 9 z" fill="#3F5122"/>
+                </marker>
+                <marker id="arr-caramel-tab" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 8 5 L 0 9 z" fill="#C47C35"/>
+                </marker>
+                <linearGradient id="grad-olive-tab" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#3F5122"/>
+                  <stop offset="100%" stop-color="#2F3D18"/>
+                </linearGradient>
+                <linearGradient id="grad-caramel-tab" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#DE9249"/>
+                  <stop offset="100%" stop-color="#C47C35"/>
+                </linearGradient>
+              </defs>
+
+              <!-- SENDER DOMAIN -->
+              <rect x="10" y="10" width="370" height="260" rx="8" fill="#FAFDF6" stroke="#CBD9B5" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <text x="25" y="28" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#3F5122">SENDER DOMAIN (CLIENT-SIDE ZERO KNOWLEDGE)</text>
+
+              <!-- Step 1 -->
+              <rect x="25" y="45" width="95" height="42" rx="6" fill="#FFFFFF" stroke="#3F5122" stroke-width="1.5"/>
+              <text x="72" y="63" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#23251E" text-anchor="middle">Select File</text>
+              <text x="72" y="77" font-family="monospace" font-size="8" fill="#5E6254" text-anchor="middle">Raw Stream</text>
+              <line x1="120" y1="66" x2="148" y2="66" stroke="#3F5122" stroke-width="1.5" marker-end="url(#arr-olive-tab)"/>
+
+              <!-- Step 2 -->
+              <rect x="150" y="45" width="105" height="42" rx="6" fill="#EEF4E4" stroke="#3F5122" stroke-width="1.5"/>
+              <text x="202" y="62" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#3F5122" text-anchor="middle">Calculate SHA-256</text>
+              <text x="202" y="76" font-family="monospace" font-size="8" fill="#23251E" text-anchor="middle">Pre-Hash Digest</text>
+
+              <!-- Step 3 -->
+              <rect x="25" y="125" width="115" height="42" rx="6" fill="#FBF4E8" stroke="#C47C35" stroke-width="1.5"/>
+              <text x="82" y="142" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#C47C35" text-anchor="middle">Secret Passphrase</text>
+              <text x="82" y="156" font-family="monospace" font-size="8" fill="#5E6254" text-anchor="middle">PBKDF2 Key Derivation</text>
+              <line x1="140" y1="146" x2="158" y2="146" stroke="#C47C35" stroke-width="1.5" marker-end="url(#arr-caramel-tab)"/>
+
+              <!-- Step 4 -->
+              <rect x="160" y="120" width="130" height="52" rx="6" fill="url(#grad-olive-tab)" stroke="#2F3D18" stroke-width="1.5"/>
+              <text x="225" y="141" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">AES-256-GCM</text>
+              <text x="225" y="157" font-family="monospace" font-size="8" fill="#EEF4E4" text-anchor="middle">128-bit Auth Tag + IV</text>
+
+              <path d="M 255 66 L 310 66 L 310 120" fill="none" stroke="#3F5122" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-olive-tab)"/>
+              <line x1="290" y1="146" x2="308" y2="146" stroke="#3F5122" stroke-width="1.5" marker-end="url(#arr-olive-tab)"/>
+
+              <!-- Step 5 -->
+              <rect x="310" y="120" width="60" height="95" rx="6" fill="#EEF4E4" stroke="#C47C35" stroke-width="1.5"/>
+              <text x="340" y="146" font-family="Inter, sans-serif" font-size="9" font-weight="800" fill="#3F5122" text-anchor="middle">PACKAGE</text>
+              <text x="340" y="160" font-family="monospace" font-size="9" font-weight="700" fill="#C47C35" text-anchor="middle">.MUSO</text>
+              <text x="340" y="174" font-family="Inter, sans-serif" font-size="7.5" fill="#5E6254" text-anchor="middle">Container</text>
+              <text x="340" y="196" font-family="monospace" font-size="7" fill="#5E6254" text-anchor="middle">IV/Salt/Tag</text>
+
+              <!-- Step 6 -->
+              <path d="M 370 167 L 458 167" fill="none" stroke="#C47C35" stroke-width="2" marker-end="url(#arr-caramel-tab)"/>
+              <rect x="388" y="152" width="55" height="26" rx="4" fill="#FFFFFF" stroke="#C47C35" stroke-width="1"/>
+              <text x="415" y="164" font-family="Inter, sans-serif" font-size="7.5" font-weight="700" fill="#C47C35" text-anchor="middle">TRANSFER</text>
+              <text x="415" y="173" font-family="monospace" font-size="6.5" fill="#5E6254" text-anchor="middle">P2P/Link/QR</text>
+
+              <!-- RECEIVER DOMAIN -->
+              <rect x="460" y="10" width="370" height="260" rx="8" fill="#FDFBF7" stroke="#E8CCA8" stroke-width="1.5" stroke-dasharray="4,3"/>
+              <text x="475" y="28" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#C47C35">RECEIVER DOMAIN (INTEGRITY &amp; AUTHENTICATION)</text>
+
+              <!-- Step 7 -->
+              <rect x="475" y="125" width="75" height="42" rx="6" fill="#EEF4E4" stroke="#3F5122" stroke-width="1.5"/>
+              <text x="512" y="142" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#3F5122" text-anchor="middle">Load Container</text>
+              <text x="512" y="156" font-family="monospace" font-size="8" fill="#5E6254" text-anchor="middle">Parse .MUSO</text>
+              <line x1="550" y1="146" x2="568" y2="146" stroke="#3F5122" stroke-width="1.5" marker-end="url(#arr-olive-tab)"/>
+
+              <!-- Step 8 -->
+              <rect x="570" y="120" width="125" height="52" rx="6" fill="url(#grad-olive-tab)" stroke="#2F3D18" stroke-width="1.5"/>
+              <text x="632" y="141" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">Decrypt &amp; Authenticate</text>
+              <text x="632" y="157" font-family="monospace" font-size="8" fill="#EEF4E4" text-anchor="middle">AES-GCM Tag Verify</text>
+
+              <rect x="580" y="45" width="105" height="34" rx="4" fill="#FBF4E8" stroke="#C47C35" stroke-width="1"/>
+              <text x="632" y="60" font-family="Inter, sans-serif" font-size="8.5" font-weight="700" fill="#C47C35" text-anchor="middle">Shared Passphrase</text>
+              <text x="632" y="72" font-family="monospace" font-size="7.5" fill="#5E6254" text-anchor="middle">Key Matching</text>
+              <line x1="632" y1="79" x2="632" y2="118" stroke="#C47C35" stroke-width="1.5" marker-end="url(#arr-caramel-tab)"/>
+
+              <line x1="695" y1="146" x2="713" y2="146" stroke="#3F5122" stroke-width="1.5" marker-end="url(#arr-olive-tab)"/>
+
+              <!-- Step 9 -->
+              <rect x="715" y="125" width="105" height="42" rx="6" fill="#EEF4E4" stroke="#3F5122" stroke-width="1.5"/>
+              <text x="767" y="142" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#3F5122" text-anchor="middle">Calculate SHA-256</text>
+              <text x="767" y="156" font-family="monospace" font-size="8" fill="#23251E" text-anchor="middle">Post-Hash Digest</text>
+
+              <!-- Step 10 -->
+              <path d="M 767 167 L 767 205" fill="none" stroke="#3F5122" stroke-width="1.5" marker-end="url(#arr-olive-tab)"/>
+              <rect x="685" y="205" width="135" height="42" rx="6" fill="#FFFFFF" stroke="#3F5122" stroke-width="1.5"/>
+              <text x="752" y="222" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#2E7D32" text-anchor="middle">&#10003; Compare Hashes</text>
+              <text x="752" y="236" font-family="monospace" font-size="7.5" fill="#5E6254" text-anchor="middle">Pre-Hash == Post-Hash</text>
+
+              <!-- Step 11 -->
+              <path d="M 685 226 L 638 226" fill="none" stroke="#3F5122" stroke-width="1.5" marker-end="url(#arr-olive-tab)"/>
+              <rect x="495" y="205" width="140" height="42" rx="6" fill="url(#grad-caramel-tab)" stroke="#A86523" stroke-width="1.5"/>
+              <text x="565" y="222" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">Save / Preview File</text>
+              <text x="565" y="236" font-family="Inter, sans-serif" font-size="7.5" fill="#FFF" text-anchor="middle">Tamper-Free Recovery</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Part 2: System Architecture Layer Stack -->
+        <div style="margin-bottom: 20px;">
+          <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--olive-primary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">
+            System Architecture Layer Stack
+          </h3>
+
+          <div class="audit-table-wrap">
+            <table class="audit-table">
+              <thead>
+                <tr>
+                  <th style="width: 22%;">Architecture Layer</th>
+                  <th>Functional Description &amp; Cryptographic Primitives</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Container Layer</strong></td>
+                  <td>Packages ciphertext payload, 12-byte IV (nonce), PBKDF2 salt, file metadata (filename, byte size, MIME type), and expiration control fields for structured serialization and later loading into .MUSO containers.</td>
+                </tr>
+                <tr>
+                  <td><strong>Integrity Layer</strong></td>
+                  <td>Calculates SHA-256 hashes and exposes comparison fields to help verify recovered data against tampering.</td>
+                </tr>
+                <tr>
+                  <td><strong>Key Utility Layer</strong></td>
+                  <td>Provides symmetric-key generation (AES-256) and RSA key-pair generation (2048/4096-bit) with public/private key export controls in standard PEM formats.</td>
+                </tr>
+                <tr>
+                  <td><strong>Transfer / Demo Layer</strong></td>
+                  <td>Offers transfer-link and QR controls plus a peer-to-peer demo interface described as using BroadcastChannel and ephemeral ECDH.</td>
+                </tr>
+                <tr>
+                  <td><strong>Audit / Reporting Layer</strong></td>
+                  <td>Displays cryptographic event information (timestamps, algorithms, digests, status) and provides JSON/CSV export controls.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Part 3: Official Security Note -->
+        <div style="background: #FFFBF2; border: 1px solid var(--caramel-border); border-left: 4px solid var(--caramel-primary); border-radius: var(--radius-md); padding: 12px 16px; display: flex; gap: 12px; align-items: flex-start;">
+          <svg style="color: var(--caramel-primary); flex-shrink: 0; margin-top: 2px;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <div style="font-size: 0.85rem; line-height: 1.5; color: var(--text-main);">
+            <strong style="color: var(--caramel-dark);">Security note:</strong> AES-GCM provides confidentiality and authentication when used correctly with a unique nonce and a protected key. A SHA-256 hash comparison is useful for detecting differences when the expected hash is trustworthy, but a plain hash by itself is not a digital signature or proof of sender identity.
+          </div>
+        </div>
+
       </div>
     </section>
 

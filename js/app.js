@@ -724,10 +724,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const rawHash = window.location.hash;
     const cleanHash = rawHash.replace(/^#/, '').toLowerCase();
 
-    if (['credits', 'send', 'receive', 'p2p', 'vault', 'audit'].includes(cleanHash)) {
+    if (['credits', 'send', 'receive', 'p2p', 'vault', 'audit', 'architecture'].includes(cleanHash)) {
       switchTab(cleanHash);
     } else if (cleanHash === 'tabpane-credits') {
       switchTab('credits');
+    } else if (cleanHash === 'tabpane-architecture') {
+      switchTab('architecture');
     }
 
     if (rawHash.includes('transfer=')) {

@@ -90,6 +90,31 @@ Pre-configured realistic enterprise files ready to test immediately:
 
 ---
 
+## 📐 System Architecture & Data Flow (1-Page Specification)
+
+```
+[Select File] ➔ [Calculate SHA-256] ➔ [Enter/Generate Secret] ➔ [AES-256-GCM Encryption] ➔ [Package as .MUSO]
+                                                                                                  │
+                                                                                           (Secure Transfer)
+                                                                                                  ▼
+[Save/Preview File] ◄─ [Compare Hashes] ◄─ [Calculate SHA-256] ◄─ [Decrypt & Authenticate] ◄─ [Load Container]
+```
+
+A dedicated, printable 1-page architecture sheet is available at [`architecture.html`](architecture.html).
+
+### Layered Architecture Stack
+| Layer | Description & Cryptographic Primitives |
+| :--- | :--- |
+| **Container Layer** | Packages ciphertext payload, 12-byte IV (nonce), PBKDF2 salt, file metadata, and expiration controls into structured `.MUSO` container files. |
+| **Integrity Layer** | Calculates SHA-256 hashes pre-encryption and post-decryption; exposes comparison fields to verify recovered data and detect tampering. |
+| **Key Utility Layer** | Provides symmetric-key generation (AES-256) and RSA key-pair generation (2048/4096-bit) with PEM export controls. |
+| **Transfer / Demo Layer** | Offers transfer-link and QR controls plus a peer-to-peer demo interface described as using BroadcastChannel and ephemeral ECDH. |
+| **Audit / Reporting Layer** | Displays cryptographic event information (timestamps, algorithms, digests, status) and provides JSON/CSV export controls. |
+
+> **Security note:** AES-GCM provides confidentiality and authentication when used correctly with a unique nonce and a protected key. A SHA-256 hash comparison is useful for detecting differences when the expected hash is trustworthy, but a plain hash by itself is not a digital signature or proof of sender identity.
+
+---
+
 ## 📦 Container Specification (`.muso`)
 
 ```json
