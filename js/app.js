@@ -719,10 +719,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Check URL Hash for shared transfer link on load
+  // Check URL Hash for tab navigation or shared transfer link on load
   function checkUrlHashTransfer() {
-    if (window.location.hash.includes('transfer=')) {
-      const params = new URLSearchParams(window.location.hash.substring(1));
+    const rawHash = window.location.hash;
+    const cleanHash = rawHash.replace(/^#/, '').toLowerCase();
+
+    if (['credits', 'send', 'receive', 'p2p', 'vault', 'audit'].includes(cleanHash)) {
+      switchTab(cleanHash);
+    } else if (cleanHash === 'tabpane-credits') {
+      switchTab('credits');
+    }
+
+    if (rawHash.includes('transfer=')) {
+      const params = new URLSearchParams(rawHash.substring(1));
       const transferId = params.get('transfer');
       const key = params.get('key');
 
@@ -745,6 +754,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   checkUrlHashTransfer();
+  window.addEventListener('hashchange', checkUrlHashTransfer);
 
   // -------------------------------------------------------------
   // 6. P2P Direct Secure Tunnel Module
