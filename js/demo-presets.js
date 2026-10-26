@@ -29,7 +29,7 @@ TIMESTAMP: 2026-10-26T04:12:08.914Z
 [00:00:03.491] THERMAL_CONTROL_LOOP: CORE_TEMP: 19.4 C | RADIATOR_PANEL_B: -41.2 C
 [00:00:04.990] AUTONOMOUS_STATION_KEEPING: ENGAGED
 ================================================================================
-ENGINEER CREDITS: Srivatsa Soham, Reniman Muzeem, Pullayya, Modi
+ENGINEER CREDITS: Srivatsa Soham, Reniman Muzeem, Polina Hswitha, Shaik Saleena
 VERIFICATION HASH: ALL CHANNELS ENCRYPTED VIA MUSO ZERO-KNOWLEDGE PROTOCOL
 ================================================================================`
   },
@@ -58,7 +58,7 @@ VERIFICATION HASH: ALL CHANNELS ENCRYPTED VIA MUSO ZERO-KNOWLEDGE PROTOCOL
       cryptographicSignature: {
         algorithm: "ECDSA-P256-SHA256",
         signer: "MUSO Medical Security Framework",
-        engineers: ["Srivatsa Soham", "Reniman Muzeem", "Pullayya", "Modi"]
+        engineers: ["Srivatsa Soham", "Reniman Muzeem", "Polina Hswitha", "Shaik Saleena"]
       }
     }, null, 2)
   },
@@ -82,7 +82,7 @@ VERIFICATION HASH: ALL CHANNELS ENCRYPTED VIA MUSO ZERO-KNOWLEDGE PROTOCOL
   </ProtectionRelay>
   <AuditVerification>
     <Project>MUSO File Transfer</Project>
-    <Engineers>Srivatsa Soham, Reniman Muzeem, Pullayya, Modi</Engineers>
+    <Engineers>Srivatsa Soham, Reniman Muzeem, Polina Hswitha, Shaik Saleena</Engineers>
     <Standard>IEC 62351 Cyber Security for Power Grid</Standard>
   </AuditVerification>
 </SubstationConfiguration>`
@@ -113,7 +113,7 @@ DATE: OCTOBER 26, 2026
 3. AUDIT TRAILS & CRYPTOGRAPHIC COMPLIANCE:
    - Key Escrow: Strictly Zero-Knowledge (Decentralized client-side derivation)
    - Cryptographic Protocol: MUSO AES-256-GCM NIST SP 800-38D
-   - Architecture Team: Srivatsa Soham, Reniman Muzeem, Pullayya, Modi
+   - Architecture Team: Srivatsa Soham, Reniman Muzeem, Polina Hswitha, Shaik Saleena
 ================================================================================`
   }
 ];

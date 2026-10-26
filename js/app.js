@@ -1,7 +1,7 @@
 /**
  * MUSO File Transfer - Core Application Controller
  * Handles user interactions, cryptography binding, P2P channel, and audit trails
- * Authors: Srivatsa Soham, Reniman Muzeem, Pullayya, Modi
+ * Authors: Srivatsa Soham, Reniman Muzeem, Polina Hswitha, Shaik Saleena
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1205,8 +1205,8 @@ PROJECT: MUSO File Transfer
 CORE ARCHITECTURE TEAM & CREDITS:
 1. Srivatsa Soham       - Lead Cryptographic Engineer & Protocol Architect
 2. Reniman Muzeem       - Full Stack Systems & Security Infrastructure Engineer
-3. Pullayya             - Zero-Knowledge UI/UX & Client-Side Runtime Engineer
-4. Modi                 - Security Auditing, Compliance & Penetration Testing Specialist
+3. Polina Hswitha       - Zero-Knowledge UI/UX & Client-Side Runtime Engineer
+4. Shaik Saleena        - Security Auditing, Compliance & Penetration Testing Specialist
 
 1. SYSTEM SUMMARY:
    MUSO File Transfer is an industrial-grade, zero-knowledge, end-to-end encrypted
@@ -1236,7 +1236,7 @@ CORE ARCHITECTURE TEAM & CREDITS:
    - GDPR Article 32 (Security of Processing / Zero-Knowledge State)
    - HIPAA Security Rule (45 CFR § 164.312(a)(2)(iv) Encryption & Integrity Verification)
 
-(C) 2026 MUSO Security Framework - Engineered by Srivatsa Soham, Reniman Muzeem, Pullayya, and Modi.
+(C) 2026 MUSO Security Framework - Engineered by Srivatsa Soham, Reniman Muzeem, Polina Hswitha, and Shaik Saleena.
 ================================================================================`;
 
       const blob = new Blob([whitepaper], { type: 'text/plain;charset=utf-8' });

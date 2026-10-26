@@ -21,8 +21,8 @@ This project was conceived, architected, and engineered by:
 | :--- | :--- |
 | **Srivatsa Soham** | **Lead Cryptographic Engineer & Protocol Architect**<br>• Designed the AES-256-GCM authenticated cipher pipeline<br>• Implemented PBKDF2 key derivation schedules (120,000 iterations)<br>• Architected the hybrid RSA-OAEP asymmetric key encapsulation mechanism |
 | **Reniman Muzeem** | **Full Stack Systems & Security Infrastructure Engineer**<br>• Engineered zero-knowledge package serialization (`.muso` container format)<br>• Built the memory-safe streaming runtime and ephemeral download token lifecycle<br>• Managed repository architecture, deployment automation, and GitHub integration |
-| **Pullayya** | **Zero-Knowledge UI/UX & Client-Side Runtime Engineer**<br>• Designed the industrial design system (Olive, Ivory, and Caramel palette)<br>• Implemented drag-and-drop file ingestion, live telemetry, and entropy analyzers<br>• Created responsive touchpoints and sandbox file previewers |
-| **Modi** | **Security Auditing, Compliance & Penetration Testing Specialist**<br>• Verified adherence to NIST SP 800-38D and FIPS 140-3 architectural standards<br>• Designed the Man-in-the-Middle (MITM) tamper simulation and authentication tag verification<br>• Implemented DoD 5220.22-M 3-pass zero-fill file shredder protocols |
+| **Polina Hswitha** | **Zero-Knowledge UI/UX & Client-Side Runtime Engineer**<br>• Designed the industrial design system (Olive, Ivory, and Caramel palette)<br>• Implemented drag-and-drop file ingestion, live telemetry, and entropy analyzers<br>• Created responsive touchpoints and sandbox file previewers |
+| **Shaik Saleena** | **Security Auditing, Compliance & Penetration Testing Specialist**<br>• Verified adherence to NIST SP 800-38D and FIPS 140-3 architectural standards<br>• Designed the Man-in-the-Middle (MITM) tamper simulation and authentication tag verification<br>• Implemented DoD 5220.22-M 3-pass zero-fill file shredder protocols |
 
 ---
 
@@ -163,4 +163,4 @@ This repository is pre-configured for GitHub Pages.
 
 Developed for demonstration and industrial evaluation.  
 **Copyright © 2026 MUSO File Transfer.**  
-Engineered with pride by **Srivatsa Soham, Reniman Muzeem, Pullayya, and Modi**.
+Engineered with pride by **Srivatsa Soham, Reniman Muzeem, Polina Hswitha, and Shaik Saleena**.
