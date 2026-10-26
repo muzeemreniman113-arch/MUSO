@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUSO file transfer | Industrial Secure File Transfer</title>
+  <meta name="description" content="Industrial-grade Zero-Knowledge Secure File Transfer using WebCrypto AES-256-GCM and RSA-OAEP Encryption. Engineered by Srivatsa Soham, Reniman Muzeem, Pullayya, and Modi.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Notice Bar with Credits Highlight -->
+  <div class="top-notice-bar">
+    <div>
+      <strong>INDUSTRIAL DEMO PLATFORM</strong> &bull; Zero-Knowledge Client-Side AES-256-GCM Cryptographic Protocol
+    </div>
+    <div>
+      Engineered by <span id="noticeCreditsLink" class="notice-credits-link">Srivatsa Soham, Reniman Muzeem, Pullayya &amp; Modi</span>
+    </div>
+  </div>
+
+  <!-- Header Section -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-wrapper" id="brandLogoHome">
+        <div class="brand-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <div class="brand-meta">
+          <h1>MUSO <span>file transfer</span></h1>
+          <div class="brand-tagline">NIST SP 800-38D Industrial Encryption</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="hardware-badge">
+          <span class="pulse-dot"></span>
+          <span>WebCrypto Accelerated</span>
+        </div>
+
+        <button class="btn btn-sm btn-outline-caramel" id="btnHeaderDemo">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+          <span>Load Demo Case</span>
+        </button>
+
+        <button class="btn btn-sm btn-outline" id="btnThemeToggle" title="Toggle Theme" aria-label="Toggle Theme">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- App Navigation Tabs -->
+  <nav class="app-navigation" aria-label="Main Navigation">
+    <div class="nav-container">
+      <button class="nav-tab-btn active" data-tab="send">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+        </svg>
+        <span>Send &amp; Encrypt</span>
+      </button>
+
+      <button class="nav-tab-btn" data-tab="receive">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        </svg>
+        <span>Receive &amp; Decrypt</span>
+      </button>
+
+      <button class="nav-tab-btn" data-tab="p2p">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+          <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+          <line x1="6" y1="6" x2="6.01" y2="6"/>
+          <line x1="6" y1="18" x2="6.01" y2="18"/>
+        </svg>
+        <span>P2P Secure Tunnel</span>
+      </button>
+
+      <button class="nav-tab-btn" data-tab="vault">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <span>Key Vault &amp; Ciphers</span>
+      </button>
+
+      <button class="nav-tab-btn" data-tab="audit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <span>Audit &amp; Compliance</span>
+      </button>
+
+      <button class="nav-tab-btn" data-tab="credits">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span>Project Credits</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="app-main">
+
+    <!-- ====================================================================
+         TAB 1: SEND & ENCRYPT ROOM
+         ==================================================================== -->
+    <section class="tab-pane active" id="tabPane-send">
+      <div class="grid-2col">
+        
+        <!-- Left Column: File Staging -->
+        <div class="muso-card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="card-title">Select Industrial File</h2>
+                <div class="card-subtitle">Zero-knowledge staging in browser memory</div>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-outline" id="btnBrowseSendFile">Browse Files</button>
+          </div>
+
+          <!-- Hidden File Input -->
+          <input type="file" id="sendFileInput" style="display: none;">
+
+          <!-- Dropzone -->
+          <div class="dropzone" id="sendDropzone">
+            <div class="dropzone-icon">
+              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+              </svg>
+            </div>
+            <div class="dropzone-text">Drag &amp; Drop confidential files here</div>
+            <div class="dropzone-sub">Supports any file format (PDF, CAD, Logs, JSON, Binaries) up to 2GB</div>
+          </div>
+
+          <!-- Quick Industrial Presets -->
+          <div class="preset-chips-wrap">
+            <span style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted);">Quick Demo Datasets:</span>
+            <button class="preset-chip" data-preset="aerospace">Satellite Telemetry (.log)</button>
+            <button class="preset-chip" data-preset="healthcare">Patient Genomic Vault (.json)</button>
+            <button class="preset-chip" data-preset="energy">Substation SCADA (.xml)</button>
+            <button class="preset-chip" data-preset="finance">M&amp;A Escrow Dossier (.txt)</button>
+          </div>
+
+          <!-- File Inspector Card (Appears when file selected) -->
+          <div class="file-inspection-card" id="sendFileInspector" style="display: none;">
+            <div class="file-spec-meta">
+              <span class="file-type-badge" id="sendFileTypeBadge">LOG</span>
+              <div>
+                <div class="file-name-text" id="sendFileName">filename.ext</div>
+                <div class="file-size-text" id="sendFileSize">0.00 KB</div>
+                <div style="margin-top: 4px;">
+                  <span class="hash-pill" id="sendFilePreHash">SHA-256: computing...</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-outline-caramel" id="btnClearSendFile">Change</button>
+          </div>
+        </div>
+
+        <!-- Right Column: Cryptographic Parameters & Packaging -->
+        <div class="muso-card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon caramel">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="card-title">Cryptographic Parameters</h2>
+                <div class="card-subtitle">FIPS 140-3 &amp; NIST SP 800-38D Specifications</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="cipherSelect">
+              <span>Encryption Algorithm</span>
+              <span class="form-hint">Authenticated Symmetric / Asymmetric</span>
+            </label>
+            <select class="form-select" id="cipherSelect">
+              <option value="AES-256-GCM" selected>AES-256-GCM (NIST Authenticated 128-bit Tag - Recommended)</option>
+              <option value="RSA-OAEP">RSA-OAEP 2048-bit Hybrid + AES-GCM (Public Key Transfer)</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="rsaKeyGroup" style="display: none;">
+            <label class="form-label" for="rsaRecipientPublicKey">
+              <span>Recipient RSA Public Key (PEM format)</span>
+            </label>
+            <textarea class="form-textarea" id="rsaRecipientPublicKey" rows="4" placeholder="-----BEGIN PUBLIC KEY-----&#10;...&#10;-----END PUBLIC KEY-----"></textarea>
+          </div>
+
+          <div class="form-group" id="passphraseGroup">
+            <label class="form-label" for="sendPassphraseInput">
+              <span>Secret Decryption Passphrase</span>
+              <button class="input-action-btn" type="button" id="btnGenerateSendKey" style="position: static; transform: none;">Auto-Generate Key</button>
+            </label>
+            <div class="input-with-action">
+              <input type="password" class="form-input" id="sendPassphraseInput" placeholder="Enter or generate secret key...">
+              <button type="button" class="input-action-btn" id="btnToggleSendKeyVisibility">Show</button>
+            </div>
+            <!-- Entropy Indicator -->
+            <div class="entropy-bar-wrapper">
+              <div class="entropy-track">
+                <div class="entropy-fill" id="entropyFill"></div>
+              </div>
+              <div class="entropy-label" id="entropyLabel">Waiting for key...</div>
+            </div>
+          </div>
+
+          <div class="grid-2col" style="gap: 12px; margin-bottom: 18px;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="expirationSelect">Expiration Lifespan</label>
+              <select class="form-select" id="expirationSelect">
+                <option value="10m">10 Minutes</option>
+                <option value="1h">1 Hour</option>
+                <option value="24h" selected>24 Hours</option>
+                <option value="7d">7 Days</option>
+                <option value="burn">Self-Destruct (Burn After 1 Read)</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="maxDownloadsSelect">Download Limit</label>
+              <select class="form-select" id="maxDownloadsSelect">
+                <option value="1" selected>1 Download (Strict Single-Use)</option>
+                <option value="3">3 Downloads</option>
+                <option value="10">10 Downloads</option>
+                <option value="999">Unlimited Downloads</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Encrypt Trigger Button -->
+          <button class="btn btn-lg btn-olive" id="btnEncryptPayload" style="width: 100%;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <span>Encrypt &amp; Package File</span>
+          </button>
+
+          <!-- Progress Bar during encryption -->
+          <div id="encryptProgressWrapper" style="display: none; margin-top: 14px;">
+            <div class="entropy-track" style="height: 8px;">
+              <div class="entropy-fill" id="encryptProgressBar" style="width: 0%; background: var(--olive-primary);"></div>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: 4px;">Executing WebCrypto AES-GCM Subsystem...</div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Post Encryption Result Box (Appears when encryption succeeds) -->
+      <div class="result-box" id="sendResultBox" style="display: none;">
+        <div class="result-header">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          <span style="font-size: 1.15rem;">File Successfully Encrypted &amp; Packaged into .MUSO Container</span>
+        </div>
+
+        <div class="telemetry-row">
+          <div class="telemetry-stat">
+            <div class="stat-label">Payload Size</div>
+            <div class="stat-value" id="statEncSize">0 KB</div>
+          </div>
+          <div class="telemetry-stat">
+            <div class="stat-label">Encryption Latency</div>
+            <div class="stat-value" id="statEncDuration">0 ms</div>
+          </div>
+          <div class="telemetry-stat">
+            <div class="stat-label">Hardware Throughput</div>
+            <div class="stat-value" id="statEncSpeed">0 Mbps</div>
+          </div>
+          <div class="telemetry-stat">
+            <div class="stat-label">Pre-Hash SHA-256</div>
+            <div class="stat-value" id="statEncHash" style="font-size: 0.85rem;">...</div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px;">
+          <button class="btn btn-olive" id="btnDownloadMusoContainer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            <span>Download .muso Container</span>
+          </button>
+
+          <button class="btn btn-caramel" id="btnCopySendKey">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span>Copy Passphrase</span>
+          </button>
+
+          <button class="btn btn-outline-olive" id="btnCopyTransferLink">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+            </svg>
+            <span>Copy Transfer Link</span>
+          </button>
+
+          <button class="btn btn-outline" id="btnViewSendQr">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"/>
+              <rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/>
+            </svg>
+            <span>View Transfer QR</span>
+          </button>
+
+          <button class="btn btn-outline-caramel" id="btnSendToP2p">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <span>Dispatch to P2P Tunnel</span>
+          </button>
+
+          <button class="btn btn-outline" id="btnResetSend" style="margin-left: auto;">
+            <span>New Transfer</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 2: RECEIVE & DECRYPT ROOM
+         ==================================================================== -->
+    <section class="tab-pane" id="tabPane-receive">
+      <div class="grid-2col">
+        
+        <!-- Left: Upload or Paste Container -->
+        <div class="muso-card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="card-title">Load Encrypted .MUSO Container</h2>
+                <div class="card-subtitle">Zero-knowledge in-browser ingestion</div>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-outline" id="btnBrowseReceiveFile">Open .muso File</button>
+          </div>
+
+          <input type="file" id="receiveFileInput" accept=".muso,.json,.txt" style="display: none;">
+
+          <div class="dropzone" id="receiveDropzone" style="padding: 24px;">
+            <div class="dropzone-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="12" y1="18" x2="12" y2="12"/>
+                <line x1="9" y1="15" x2="15" y2="15"/>
+              </svg>
+            </div>
+            <div class="dropzone-text">Drop .muso container file here</div>
+            <div class="dropzone-sub">Or paste raw container JSON payload below</div>
+          </div>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <div class="form-label">
+              <span>Container JSON / Cipher Payload</span>
+              <button class="input-action-btn" type="button" id="btnPasteClipboard" style="position: static; transform: none;">Paste from Clipboard</button>
+            </div>
+            <textarea class="form-textarea" id="receivePayloadText" rows="6" placeholder="Paste full .muso JSON payload or drop container file here..."></textarea>
+          </div>
+        </div>
+
+        <!-- Right: Decryption Key & Security Verification -->
+        <div class="muso-card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon caramel">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="card-title">Decrypt &amp; Verify Integrity</h2>
+                <div class="card-subtitle">Zero-Knowledge cryptographic authentication</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Metadata card (Appears when container is parsed) -->
+          <div class="muso-card" id="containerMetaCard" style="display: none; background: var(--bg-subtle); border-color: var(--olive-border); padding: 14px; margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="file-type-badge" id="containerCipherBadge">AES-256-GCM</span>
+              <span id="containerExpBadge" style="font-size: 0.75rem; font-weight: 700; color: var(--caramel-primary);">Standard Transfer</span>
+            </div>
+            <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-main);" id="containerFileName">payload.bin</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">
+              Original Size: <strong id="containerFileSize">0 KB</strong> &bull; Packaged: <span id="containerTimestamp">...</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="receivePassphraseInput">
+              <span>Decryption Passphrase / Secret Key</span>
+              <span class="form-hint">Required to derive AES key via PBKDF2</span>
+            </label>
+            <div class="input-with-action">
+              <input type="password" class="form-input" id="receivePassphraseInput" placeholder="Enter transfer passphrase...">
+              <button type="button" class="input-action-btn" id="btnToggleReceiveKeyVisibility">Show</button>
+            </div>
+          </div>
+
+          <button class="btn btn-lg btn-olive" id="btnDecryptPayload" style="width: 100%;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+            </svg>
+            <span>Decrypt &amp; Authenticate File</span>
+          </button>
+
+          <!-- Decryption Result & Integrity Match -->
+          <div class="result-box" id="receiveResultBox" style="display: none;">
+            <div class="integrity-banner valid">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <div>
+                <strong>CRYPTOGRAPHIC INTEGRITY VERIFIED (100% GENUINE)</strong>
+                <div style="font-size: 0.78rem;">Decrypted file SHA-256 perfectly matches original pre-hash digest. Zero tampering detected.</div>
+              </div>
+            </div>
+
+            <div style="font-size: 0.78rem; font-family: var(--font-mono); margin-bottom: 12px; word-break: break-all;">
+              <div><strong>Pre-Hash:</strong> <span id="integrityHashPre" style="color: var(--olive-primary);"></span></div>
+              <div><strong>Post-Hash:</strong> <span id="integrityHashPost" style="color: var(--olive-primary);"></span></div>
+            </div>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn btn-olive" id="btnDownloadDecryptedFile">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                </svg>
+                <span>Save Original File (<span id="statDecFileName">file</span>)</span>
+              </button>
+
+              <button class="btn btn-caramel" id="btnPreviewDecryptedFile">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <span>Secure In-Browser Preview</span>
+              </button>
+
+              <button class="btn btn-outline" id="btnWipeDecryptedFile" style="margin-left: auto;">
+                <span>Wipe from RAM</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 3: P2P SECURE TUNNEL VISUALIZER
+         ==================================================================== -->
+    <section class="tab-pane" id="tabPane-p2p">
+      <div class="muso-card" style="margin-bottom: 24px;">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                <line x1="6" y1="6" x2="6.01" y2="6"/>
+                <line x1="6" y1="18" x2="6.01" y2="18"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="card-title">Live Peer-to-Peer Encrypted Data Channel</h2>
+              <div class="card-subtitle">Zero-relay broadcast channel with Ephemeral ECDH &amp; AES-GCM tag verification</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn btn-sm btn-olive" id="btnP2pTransmit">Transmit Sample Packet</button>
+            <button class="btn btn-sm btn-outline-caramel" id="btnP2pSimulateTamper">Simulate Tamper Attack (MITM)</button>
+            <button class="btn btn-sm btn-outline" id="btnP2pClearLogs">Clear</button>
+          </div>
+        </div>
+
+        <div class="p2p-terminal-wrap">
+          <!-- Client A Terminal -->
+          <div class="tunnel-node-card">
+            <div class="tunnel-node-header">
+              <strong>Node Alpha (Sender)</strong>
+              <span class="status-badge success">READY</span>
+            </div>
+            <div class="terminal-stream" id="p2pTerminalSender">
+              <div style="color: #8BC34A;">[P2P CHANNEL ONLINE - BROADCAST READY]</div>
+              <div>[CRYPTO] WebCrypto AES-GCM Hardware Core Bound</div>
+              <div>[ECDH] Ephemeral Elliptic Curve Key Negotiator Standby</div>
+            </div>
+          </div>
+
+          <!-- Connecting Node Beam -->
+          <div class="tunnel-connector">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--caramel-primary);">256-BIT TUNNEL</div>
+            <div class="tunnel-beam"></div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono);">ZERO RELAY</div>
+          </div>
+
+          <!-- Client B Terminal -->
+          <div class="tunnel-node-card">
+            <div class="tunnel-node-header">
+              <strong>Node Beta (Receiver)</strong>
+              <span class="status-badge success">LISTENING</span>
+            </div>
+            <div class="terminal-stream" id="p2pTerminalReceiver">
+              <div style="color: #8BC34A;">[P2P RECEIVER READY - STANDBY FOR INCOMING CHUNKS]</div>
+              <div>[SEC] Zero-Knowledge Container Parser Active</div>
+              <div>[TAG] GCM 128-bit Tag Verifier Armed</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="file-inspection-card" style="margin-top: 0;">
+          <div style="font-size: 0.82rem; color: var(--text-muted);">
+            <strong>Demo Tip:</strong> Open MUSO file transfer in a second browser window or tab! The BroadcastChannel will automatically sync encrypted transfers in real-time across both sessions without contacting any external cloud server.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 4: KEY VAULT & CIPHERS STUDIO
+         ==================================================================== -->
+    <section class="tab-pane" id="tabPane-vault">
+      <div class="grid-2col">
+        
+        <!-- RSA Keypair Generator -->
+        <div class="muso-card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="card-title">RSA Keypair Generator</h2>
+                <div class="card-subtitle">Asymmetric SPKI / PKCS8 PEM Export</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="rsaKeySizeSelect">Modulus Bit Length</label>
+            <select class="form-select" id="rsaKeySizeSelect">
+              <option value="2048" selected>2048-bit (Industrial Standard)</option>
+              <option value="4096">4096-bit (Quantum-Resistant Ultra Security)</option>
+            </select>
+          </div>
+
+          <button class="btn btn-olive" id="btnGenerateRsa" style="width: 100%; margin-bottom: 16px;">Generate RSA Keypair</button>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 0.78rem; font-weight: 700;">Public Key (SPKI PEM)</span>
+              <div>
+                <button class="btn btn-sm btn-outline-olive" id="btnCopyRsaPub">Copy</button>
+                <button class="btn btn-sm btn-outline" id="btnDownloadRsaPub">.pem</button>
+              </div>
+            </div>
+            <pre class="key-code-block" id="rsaPublicKeyDisplay" style="height: 110px;">Click 'Generate RSA Keypair' to produce 2048/4096-bit keys...</pre>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span style="font-size: 0.78rem; font-weight: 700;">Private Key (PKCS8 PEM)</span>
+              <div>
+                <button class="btn btn-sm btn-outline-caramel" id="btnCopyRsaPriv">Copy</button>
+                <button class="btn btn-sm btn-outline" id="btnDownloadRsaPriv">.pem</button>
+              </div>
+            </div>
+            <pre class="key-code-block" id="rsaPrivateKeyDisplay" style="height: 110px;">Private key will be displayed here...</pre>
+          </div>
+        </div>
+
+        <!-- Symmetric Studio & Hash Calculator -->
+        <div class="muso-card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon caramel">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="4 17 10 11 4 5"/>
+                  <line x1="12" y1="19" x2="20" y2="19"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="card-title">Symmetric Key Generator</h2>
+                <div class="card-subtitle">256-bit CSPRNG High-Entropy Raw Keys</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+            <button class="btn btn-sm btn-olive" id="btnGenerateHexKey">Generate 256-bit Hex</button>
+            <button class="btn btn-sm btn-caramel" id="btnGenerateB64Key">Generate Base64 Key</button>
+            <button class="btn btn-sm btn-outline" id="btnCopySymKey">Copy</button>
+          </div>
+          <input type="text" class="form-input" id="symmetricKeyDisplay" placeholder="Generated symmetric key will appear here..." readonly style="font-family: var(--font-mono); margin-bottom: 24px;">
+
+          <!-- Checksum Calculator -->
+          <div class="card-header" style="margin-top: 10px;">
+            <div class="card-title-group">
+              <div>
+                <h2 class="card-title">Cryptographic Hash &amp; Checksum</h2>
+                <div class="card-subtitle">SubtleCrypto SHA-256, SHA-512, SHA-1, MD5</div>
+              </div>
+            </div>
+          </div>
+
+          <input type="file" id="hashFileInput" style="display: none;">
+          <div class="dropzone" id="hashDropzone" style="padding: 16px; margin-bottom: 12px;">
+            <div class="dropzone-text" style="font-size: 0.85rem;">Click or drop file to compute multi-hash checksums</div>
+          </div>
+
+          <div class="form-group">
+            <input type="text" class="form-input" id="hashTextInput" placeholder="Or enter plain text to calculate instant hash..." style="font-size: 0.85rem;">
+          </div>
+
+          <div style="font-size: 0.78rem; font-family: var(--font-mono); display: flex; flex-direction: column; gap: 8px;">
+            <div>
+              <strong>SHA-256:</strong>
+              <div style="display: flex; gap: 6px; align-items: center; margin-top: 2px;">
+                <span class="hash-pill" id="hashDisplaySha256" style="flex: 1;">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span>
+                <button class="btn btn-sm btn-outline btn-copy-hash" data-target="hashDisplaySha256">Copy</button>
+              </div>
+            </div>
+
+            <div>
+              <strong>SHA-512:</strong>
+              <div style="display: flex; gap: 6px; align-items: center; margin-top: 2px;">
+                <span class="hash-pill" id="hashDisplaySha512" style="flex: 1;">cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce...</span>
+                <button class="btn btn-sm btn-outline btn-copy-hash" data-target="hashDisplaySha512">Copy</button>
+              </div>
+            </div>
+
+            <div>
+              <strong>SHA-1:</strong>
+              <div style="display: flex; gap: 6px; align-items: center; margin-top: 2px;">
+                <span class="hash-pill" id="hashDisplaySha1" style="flex: 1;">da39a3ee5e6b4b0d3255bfef95601890afd80709</span>
+                <button class="btn btn-sm btn-outline btn-copy-hash" data-target="hashDisplaySha1">Copy</button>
+              </div>
+            </div>
+
+            <div>
+              <strong>Checksum (MD5 FNV):</strong>
+              <div style="display: flex; gap: 6px; align-items: center; margin-top: 2px;">
+                <span class="hash-pill" id="hashDisplayMd5" style="flex: 1;">811c9dc5</span>
+                <button class="btn btn-sm btn-outline btn-copy-hash" data-target="hashDisplayMd5">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <label class="form-label" for="hashCompareInput">
+              <span>Compare Target Hash</span>
+              <span id="hashMatchBadge" class="status-badge success" style="display: none;">MATCH</span>
+            </label>
+            <input type="text" class="form-input" id="hashCompareInput" placeholder="Paste expected SHA-256 to verify..." style="font-family: var(--font-mono); font-size: 0.8rem;">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Secure File Shredder Simulation -->
+      <div class="muso-card" style="margin-top: 24px;">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"/>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="card-title">DoD 5220.22-M Multi-Pass Cryptographic Shredder</h2>
+              <div class="card-subtitle">Zero-fill memory sanitizer for discarded confidential documents</div>
+            </div>
+          </div>
+          <button class="btn btn-caramel" id="btnExecuteShred">Execute 3-Pass Sanitization</button>
+        </div>
+
+        <div id="shredProgressWrapper" style="display: none;">
+          <div class="entropy-track" style="height: 10px; margin-bottom: 8px;">
+            <div class="entropy-fill" id="shredProgressBar" style="width: 0%; background: var(--caramel-primary);"></div>
+          </div>
+          <div id="shredStatusText" style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--text-main);">
+            Sanitization in progress...
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 5: AUDIT & COMPLIANCE LOG
+         ==================================================================== -->
+    <section class="tab-pane" id="tabPane-audit">
+      <div class="muso-card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="card-title">Real-Time Cryptographic Audit Trails</h2>
+              <div class="card-subtitle">Immutable client-side telemetry compliant with NIST SP 800-53 &amp; GDPR Art 32</div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <select class="form-select" id="auditFilterSelect" style="width: auto; padding: 6px 10px; font-size: 0.82rem;">
+              <option value="ALL">All Categories</option>
+              <option value="ENCRYPTION">Encryption Events</option>
+              <option value="DECRYPTION">Decryption Events</option>
+              <option value="KEYGEN">Key Generation</option>
+              <option value="TAMPER">Tamper Alerts</option>
+              <option value="SHRED">Shredding Events</option>
+            </select>
+            <button class="btn btn-sm btn-olive" id="btnExportAuditJson">Export JSON</button>
+            <button class="btn btn-sm btn-outline-caramel" id="btnExportAuditCsv">Export CSV</button>
+            <button class="btn btn-sm btn-outline" id="btnPurgeAuditLogs">Purge</button>
+          </div>
+        </div>
+
+        <div class="audit-table-wrap">
+          <table class="audit-table">
+            <thead>
+              <tr>
+                <th>Event ID / Timestamp</th>
+                <th>Category</th>
+                <th>Action Performed</th>
+                <th>Algorithm</th>
+                <th>Status</th>
+                <th>Hash Digest</th>
+              </tr>
+            </thead>
+            <tbody id="auditTableBody">
+              <!-- Dynamically populated by audit-logger.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Compliance Badges -->
+        <div class="standards-grid">
+          <div class="standard-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <div>
+              <strong>NIST SP 800-38D</strong>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">AES-256 Galois/Counter Mode with 128-bit authentication tag verification.</div>
+            </div>
+          </div>
+
+          <div class="standard-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <div>
+              <strong>FIPS 140-3 Architecture</strong>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">Decentralized zero-knowledge key escrow. Plaintext never traverses network boundaries.</div>
+            </div>
+          </div>
+
+          <div class="standard-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <div>
+              <strong>GDPR Article 32 &amp; HIPAA</strong>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">Cryptographic pseudonymization and self-destruct single-use access controls.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 6: PROJECT CREDITS & ENGINEERING ARCHITECTURE
+         ==================================================================== -->
+    <section class="tab-pane" id="tabPane-credits">
+      <div class="credits-hero-card">
+        <h2 class="credits-title">MUSO file transfer</h2>
+        <div class="credits-subtitle">
+          An industrial-grade, client-side zero-knowledge encrypted file transfer framework engineered to provide military-grade data protection, cryptographic integrity verification, and tamper detection.
+        </div>
+        <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+          <button class="btn btn-olive" id="btnDownloadWhitepaper">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+            </svg>
+            <span>Download Architecture Whitepaper</span>
+          </button>
+          <a class="btn btn-caramel" href="https://github.com/muzeemreniman113-arch/MUSO.git" target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+            <span>View Source on GitHub</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Core Authors Grid -->
+      <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px; text-align: center;">
+        Core Engineering &amp; Architectural Contributors
+      </h3>
+
+      <div class="team-grid">
+        <!-- Author 1: Srivatsa Soham -->
+        <div class="team-member-card">
+          <div class="member-avatar">SS</div>
+          <h4 class="member-name">Srivatsa Soham</h4>
+          <div class="member-role">Lead Cryptographic Engineer &amp; Protocol Architect</div>
+          <p class="member-bio">
+            Designed the AES-256-GCM authenticated cipher core, PBKDF2 key derivation schedules, and asymmetric RSA-OAEP envelope algorithms.
+          </p>
+        </div>
+
+        <!-- Author 2: Reniman Muzeem -->
+        <div class="team-member-card">
+          <div class="member-avatar">RM</div>
+          <h4 class="member-name">Reniman Muzeem</h4>
+          <div class="member-role">Full Stack Systems &amp; Security Infrastructure Engineer</div>
+          <p class="member-bio">
+            Engineered the zero-knowledge transfer orchestration, package serialization into .muso containers, repository deployment, and secure memory pipelines.
+          </p>
+        </div>
+
+        <!-- Author 3: Pullayya -->
+        <div class="team-member-card">
+          <div class="member-avatar">P</div>
+          <h4 class="member-name">Pullayya</h4>
+          <div class="member-role">Zero-Knowledge UI/UX &amp; Client-Side Runtime Engineer</div>
+          <p class="member-bio">
+            Crafted the industrial Olive, Ivory, and Caramel design system, drag-and-drop file ingestion engines, and responsive user-friendly interaction telemetry.
+          </p>
+        </div>
+
+        <!-- Author 4: Modi -->
+        <div class="team-member-card">
+          <div class="member-avatar">M</div>
+          <h4 class="member-name">Modi</h4>
+          <div class="member-role">Security Auditing, Compliance &amp; Penetration Testing Specialist</div>
+          <p class="member-bio">
+            Spearheaded FIPS 140-3 and NIST SP 800-38D regulatory auditing, man-in-the-middle tamper simulation benchmarks, and DoD 5220.22-M zero-fill shredder protocols.
+          </p>
+        </div>
+      </div>
+
+      <!-- Project Specification Summary -->
+      <div class="muso-card" style="margin-top: 28px;">
+        <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--olive-primary); margin-bottom: 12px;">Industrial Demonstration &amp; Academic Scope</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 14px;">
+          This demo is developed for industrial enterprise evaluation, demonstrating that full zero-knowledge encryption can be executed natively in standard browsers without transmitting raw passwords, private keys, or unencrypted data over network wires. Every button, cipher option, and audit trail in this web application is fully operational and powered by the W3C Web Cryptography API.
+        </p>
+        <div style="font-size: 0.82rem; font-weight: 600; color: var(--caramel-primary);">
+          Project Credits: Srivatsa Soham, Reniman Muzeem, Pullayya, Modi &bull; MUSO File Transfer &copy; 2026
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modals -->
+
+  <!-- Modal 1: Demo Presets Selector -->
+  <div class="modal-overlay" id="demoModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Select Industrial Demo Case</h3>
+        <button class="modal-close-btn" aria-label="Close Modal">&times;</button>
+      </div>
+      <div id="demoModalList">
+        <!-- Dynamically populated from demo-presets.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: QR Code Viewer -->
+  <div class="modal-overlay" id="qrModal">
+    <div class="modal-box" style="text-align: center; max-width: 440px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Secure Transfer QR Code</h3>
+        <button class="modal-close-btn" aria-label="Close Modal">&times;</button>
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;">
+        Scan with mobile or peer device camera to open instant zero-knowledge decryption room:
+      </p>
+      <div style="background: var(--bg-primary); padding: 16px; border-radius: 12px; display: inline-block; border: 1px solid var(--border-light); margin-bottom: 14px;">
+        <canvas id="qrCanvas"></canvas>
+      </div>
+      <input type="text" class="form-input" id="qrLinkDisplay" readonly style="font-size: 0.75rem; font-family: var(--font-mono); margin-bottom: 14px; text-align: center;">
+      <button class="btn btn-olive modal-close-btn" style="width: 100%;">Done</button>
+    </div>
+  </div>
+
+  <!-- Modal 3: Secure Sandbox Preview Modal -->
+  <div class="modal-overlay" id="previewModal">
+    <div class="modal-box" style="max-width: 780px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="previewModalTitle">Secure Sandbox Preview</h3>
+        <button class="modal-close-btn" aria-label="Close Modal">&times;</button>
+      </div>
+      <div id="previewModalBody">
+        <!-- Dynamically rendered decrypted preview -->
+      </div>
+      <div style="margin-top: 18px; text-align: right;">
+        <button class="btn btn-olive modal-close-btn">Close Preview</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div>
+          <div style="font-weight: 700; font-size: 1rem; color: var(--text-main);">
+            MUSO <span style="color: var(--olive-primary);">file transfer</span>
+          </div>
+          <div style="font-size: 0.78rem; color: var(--text-muted);">
+            Industrial-Grade Zero-Knowledge Encryption Framework &bull; NIST SP 800-38D Compliant
+          </div>
+        </div>
+
+        <div class="footer-credits-highlight">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+          </svg>
+          <span>Credits: Srivatsa Soham, Reniman Muzeem, Pullayya, Modi</span>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          Default Industrial Theme: Olive (#3F5122), Ivory (#FAF8F2), Caramel (#C47C35).
+        </div>
+        <div>
+          GitHub: <a href="https://github.com/muzeemreniman113-arch/MUSO.git" target="_blank" rel="noopener noreferrer" style="color: var(--caramel-primary); text-decoration: underline;">muzeemreniman113-arch/MUSO</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/crypto-engine.js"></script>
+  <script src="js/qr-generator.js"></script>
+  <script src="js/demo-presets.js"></script>
+  <script src="js/audit-logger.js"></script>
+  <script src="js/transfer-manager.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
