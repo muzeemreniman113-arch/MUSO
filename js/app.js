@@ -624,10 +624,10 @@ document.addEventListener('DOMContentLoaded', () => {
         state.currentDecryptedResult = result;
 
         // Populate integrity telemetry
-        integrityHashPre.textContent = result.preHash;
-        integrityHashPost.textContent = result.postHash;
-        statDecDuration.textContent = `${result.durationMs} ms`;
-        statDecFileName.textContent = result.fileName;
+        if (integrityHashPre) integrityHashPre.textContent = result.preHash;
+        if (integrityHashPost) integrityHashPost.textContent = result.postHash;
+        if (statDecDuration) statDecDuration.textContent = `${result.durationMs} ms`;
+        if (statDecFileName) statDecFileName.textContent = result.fileName;
 
         receiveResultBox.style.display = 'block';
 
