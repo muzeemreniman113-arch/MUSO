@@ -433,13 +433,16 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="receivePassphraseInput">
-              <span>Decryption Passphrase / Secret Key</span>
-              <span class="form-hint">Required to derive AES key via PBKDF2</span>
-            </label>
+            <div class="form-label">
+              <label for="receivePassphraseInput">Decryption Passphrase / Secret Key</label>
+              <button class="input-action-btn" type="button" id="btnAutoFillReceiveKey" style="position: static; transform: none; color: var(--caramel-primary); font-weight: 700;">Auto-Fill Key</button>
+            </div>
             <div class="input-with-action">
               <input type="password" class="form-input" id="receivePassphraseInput" placeholder="Enter transfer passphrase...">
               <button type="button" class="input-action-btn" id="btnToggleReceiveKeyVisibility">Show</button>
+            </div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 5px;" id="receiveKeyHint">
+              <strong>Demo Key:</strong> <code style="background: var(--bg-subtle); padding: 2px 6px; border-radius: 4px; cursor: pointer; color: var(--olive-primary);" id="codeDemoKey">Aero-Titan#9921!QuantumShield</code> (click code or 'Auto-Fill Key' to insert)
             </div>
           </div>
 

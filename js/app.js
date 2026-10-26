@@ -459,6 +459,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const receivePassphraseInput = document.getElementById('receivePassphraseInput');
   const btnToggleReceiveKeyVisibility = document.getElementById('btnToggleReceiveKeyVisibility');
+  const btnAutoFillReceiveKey = document.getElementById('btnAutoFillReceiveKey');
+  const codeDemoKey = document.getElementById('codeDemoKey');
   const btnDecryptPayload = document.getElementById('btnDecryptPayload');
 
   const receiveResultBox = document.getElementById('receiveResultBox');
@@ -558,6 +560,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         containerMetaCard.style.display = 'block';
+
+        if (codeDemoKey) {
+          codeDemoKey.textContent = getActivePassphrase();
+        }
       }
     } catch (e) {
       // Still invalid or typing
@@ -569,6 +575,32 @@ document.addEventListener('DOMContentLoaded', () => {
       const isPassword = receivePassphraseInput.type === 'password';
       receivePassphraseInput.type = isPassword ? 'text' : 'password';
       btnToggleReceiveKeyVisibility.textContent = isPassword ? 'Hide' : 'Show';
+    });
+  }
+
+  function getActivePassphrase() {
+    if (state.currentSendPassphrase) {
+      return state.currentSendPassphrase;
+    }
+    if (state.currentReceiveContainer && state.currentReceiveContainer.fileMeta) {
+      const match = window.MusoDemoPresets.find(p => p.fileName === state.currentReceiveContainer.fileMeta.name);
+      if (match) return match.recommendedPassphrase;
+    }
+    return 'Aero-Titan#9921!QuantumShield';
+  }
+
+  if (btnAutoFillReceiveKey) {
+    btnAutoFillReceiveKey.addEventListener('click', () => {
+      const key = getActivePassphrase();
+      receivePassphraseInput.value = key;
+      showToast('Decryption passphrase auto-filled!', 'caramel');
+    });
+  }
+
+  if (codeDemoKey) {
+    codeDemoKey.addEventListener('click', () => {
+      receivePassphraseInput.value = codeDemoKey.textContent.trim();
+      showToast('Key copied to decryption input!', 'olive');
     });
   }
 
